@@ -3,4 +3,5 @@ ofxCv
 ofxGui
 ofxMaxim
 ofxMidi
+ofxRapidLib
 ofxXmlSettings

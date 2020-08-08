@@ -36,8 +36,9 @@
 #include <math.h>
 
 
-#include "regression.h"
-#include "modelSet.h"
+#include "ofxRapidLib.h"
+//#include "regression.h"
+//#include "modelSet.h"
 #include "ofxGui.h"
 #include "ofxXmlSettings.h"
 #include "ofMain.h"
