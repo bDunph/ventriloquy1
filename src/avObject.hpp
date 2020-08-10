@@ -87,7 +87,7 @@ public:
     //********* elements accessed from ofApp av1, av2 etc*******//
     ofxPanel gui;
     ofxPanel guiRW;
-    regression reg;
+    rapidlib::regression reg;
     ofxIntSlider texColR;
     ofxIntSlider texColG;
     ofxIntSlider texColB;
@@ -409,7 +409,7 @@ private:
     //********** Rapidmix ************//
     
     
-    std::vector<trainingExample> trainingSet;
+    std::vector<rapidlib::trainingExample> trainingSet;
     
     bool result;
     bool isTrained;
