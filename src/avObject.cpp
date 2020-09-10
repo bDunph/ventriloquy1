@@ -38,19 +38,16 @@ void avObject::avSetup(){
     
     //********* Texture/Image Loading ***************//
     
-    img.load("Abstract_003/Abstract_003_COLOR.jpg");
-    img.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
-    normMap.load("Abstract_003/Abstract_003_NRM.jpg");
+    //img.load("textures/Abstract_003_COLOR.jpg");
+    //img.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
+    normMap.load("textures/normMap.jpg");
     normMap.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
     
     tex.allocate(256, 256, GL_RGBA);
     tex.setTextureWrap(GL_REPEAT, GL_REPEAT);
     
-    for(int k = 0; k < 256 * 256 * 4; k+=4){
-        texData[k+0] = 35;
-        texData[k+1] = 0;
-        texData[k+2] = 0;
-        texData[k+3] = 20;
+    for(int i = 0; i < 256 * 256 * 4; i++){
+        texData[i] = 0;
     }
     texPtr = &texData[0];
     
@@ -302,9 +299,9 @@ void avObject::visual (const unsigned int triggerValue, float* moveModelView, fl
     
     //******* object RGB colour and Brightness to map to freq *******//
     
-    objectRGB_col = ofColor(texR, texG, texB, texA);
-    objectLightness = objectRGB_col.getLightness();
-    lightness_freq_map = ofMap((int) objectLightness, 0, 255, 0, 512);
+    //objectRGB_col = ofColor(texR, texG, texB, texA);
+    //objectLightness = objectRGB_col.getLightness();
+    //lightness_freq_map = ofMap((int) objectLightness, 0, 255, 0, 512);
     
     //***** object sound level related to dist from camera and size ****//
     
