@@ -161,6 +161,7 @@ void avObject::avSetup(){
     //*************** Visual Setup ****************//
     
     cubeShader.load("noise_light_bump_shader");
+	sphereShader.load("noise_light_bump_shader");
     
     //    furthestPoint = ofVec3f(ofGetWindowWidth(), ofGetWindowHeight(), cam.getFarClip());
     
@@ -259,7 +260,7 @@ void avObject::visual (const unsigned int triggerValue, float* moveModelView, fl
         size = 55;
     }
     
-    trigger = triggerValue;
+    //trigger = triggerValue;
     
     //        int texR = texColR;
     //        int texG = texColG;
@@ -304,7 +305,7 @@ void avObject::visual (const unsigned int triggerValue, float* moveModelView, fl
     //lightness_freq_map = ofMap((int) objectLightness, 0, 255, 0, 512);
     
     //***** object sound level related to dist from camera and size ****//
-    
+    // calculations based on this article https://community.sw.siemens.com/s/article/sound-pressure-sound-power-and-sound-intensity-what-s-the-difference
     const double soundPowerThresh = 0.000000000001;
     soundPower = ofMap(shapeSize, 50, 1050, soundPowerThresh, 0.01);
     objPos = ofVec3f(xTrans, yTrans, zTrans) * camModelViewMat;
@@ -504,28 +505,28 @@ void avObject::drawVisual(ofVec3f lightCol, ofVec3f ambCol, ofVec3f specCol, flo
         //                } else if(!texType){
         //                    img.getTexture().bind();
         //                }
-        cubeShader.begin();
+        sphereShader.begin();
         ofPushMatrix();
 #ifdef PSMOVE_ON
         ofLoadMatrix(camModelViewMat);
 #endif
         
-        cubeShader.setUniformTexture("normMap", normMap, 1);
+        sphereShader.setUniformTexture("normMap", normMap, 1);
         for(int j = 0; j < NUMLIGHTS; j++){
             cameraSpaceLightPos[j] = camModelViewMat * globalLightPos[j];
-            cubeShader.setUniform4f("cameraSpaceLightPos", cameraSpaceLightPos[j]);
+            sphereShader.setUniform4f("cameraSpaceLightPos", cameraSpaceLightPos[j]);
         }
-        cubeShader.setUniform1f("speed", speed);
-        cubeShader.setUniform1f("displacementHeight", dispH);
-        cubeShader.setUniform1f("pulse", visPulse);
-        cubeShader.setUniform3f("lightCol", lightCol);
-        cubeShader.setUniform3f("ambCol", ambCol);
-        cubeShader.setUniform3f("specCol", specCol);
-        cubeShader.setUniform1f("lightPow", lightPow);
-        cubeShader.setUniform1f("brightness", brightness);
+        sphereShader.setUniform1f("speed", speed);
+        sphereShader.setUniform1f("displacementHeight", dispH);
+        sphereShader.setUniform1f("pulse", visPulse);
+        sphereShader.setUniform3f("lightCol", lightCol);
+        sphereShader.setUniform3f("ambCol", ambCol);
+        sphereShader.setUniform3f("specCol", specCol);
+        sphereShader.setUniform1f("lightPow", lightPow);
+        sphereShader.setUniform1f("brightness", brightness);
         sphere.draw();
         ofPopMatrix();
-        cubeShader.end();
+        sphereShader.end();
         //                if(texType){
         tex.unbind();
         //                } else if(!texType){
@@ -746,9 +747,10 @@ double * avObject::audio(float blur){
     
 }
 
-double * avObject::panner(){
+double * avObject::panner()
+{
     
-    objPos_camSpace = ofVec4f(xTrans, yTrans, zTrans, 1) * camModelViewMat;
+    objPos_camSpace =  camModelViewMat * ofVec4f(xTrans, yTrans, zTrans, 1); 
     
     objPos_asPercentage_ofX_axis = ofMap(objPos_camSpace.x, -1440, 1440, 0.f, 1.f);
     

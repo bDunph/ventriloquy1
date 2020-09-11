@@ -222,6 +222,7 @@ private:
     ofBoxPrimitive box;
     ofSpherePrimitive sphere;
     ofShader cubeShader;
+	ofShader sphereShader;
 //    ofEasyCam cam;
     
     maxiOsc noiseFreq;
