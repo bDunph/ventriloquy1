@@ -5,28 +5,6 @@
 //  Created by Bryan Dunphy on 20/02/2017.
 //
 //
-
-//MY NOTES
-// Remove redundant or unused variables
-//Use vector rather than 3 numbers
-//magic numbers, use constants instead
-// dont have function lonfer than a page
-//sub divide your functions. A function should be no more than a page
-// you can find programs than auto generate docs
-//
-//then do a class diagram (UML)
-//Make empty classes
-//move variables and functions piece by piece.
-
-// CLASSES
-// - Input class
-//- GUI Class
-// Audio Class
-//- NNClass
-// SHape
-//GraphicsWorld
-
-
 #ifndef avObject_hpp
 #define avObject_hpp
 
@@ -34,11 +12,7 @@
 #include <random>
 #include <vector>
 #include <math.h>
-
-
 #include "ofxRapidLib.h"
-//#include "regression.h"
-//#include "modelSet.h"
 #include "ofxGui.h"
 #include "ofxXmlSettings.h"
 #include "ofMain.h"
@@ -47,14 +21,11 @@
 #include "maxiGrains.h"
 #include "psMoveTrackerClass.hpp"
 
-
 #define NUMTAPS 2
 #define MESHES 2
 #define numParams 21
 #define numRandParams 22
 #define NUMLIGHTS 2
-#define PSMOVE_ON 1
-//#define PSMOVE_OFF 1
 
 typedef hannWinFunctor grainPlayerWin;
 
@@ -65,8 +36,6 @@ public:
     ~avObject();
 
     void avSetup();
-//    void camAndLights();
-//    void updateGlobalParams(float *paramPtr);
     void visual(const unsigned int triggerValue, float* moveModelView, float* camModelViewMatPtr, ofVec3f camPos, ofVec3f lightPos);
     void drawVisual(ofVec3f lightCol, ofVec3f ambCol, ofVec3f specCol, float lightPow);
     double * audio(float blur);
@@ -77,12 +46,7 @@ public:
     void trainedOutput(float x, float y, float z);
     bool readWrite();
     void loadExamples(const int objNum);
-    bool loadModels(const int modelNum);
     void drawGuiAndGuiRW();
-//    bool setUpFMSynthParams(std::vector<double> output);
-//    void setupSubSynth(std::vector<double> output);
-//    void drawCamAndLightGui();
-//    void finish();
     
     //********* elements accessed from ofApp av1, av2 etc*******//
     ofxPanel gui;
@@ -92,51 +56,13 @@ public:
     ofxIntSlider texColG;
     ofxIntSlider texColB;
     ofxIntSlider shape;
-//    ofxToggle synth;
     ofxIntSlider waveform;
-//    ofxToggle delaySig;
     ofxIntSlider controlVoltage;
     unsigned int shapeSize;
     
 private:
     
-//    //************ Global Params ***************//
-//
-//    float camX, camY, camZ;
-//    float lightColR, lightColG, lightColB;
-//    float ambColR, ambColG, ambColB;
-//    float specColR, specColG, specColB;
-//    float lightPow;
-//    float lightPosX, lightPosY, lightPosZ;
-//    float blurAmnt;
-    
-    //*************** Gui **************//
-    
-    
-//    ofxPanel camGui;
-//    ofxPanel lightGui;
-    
-    //*** visuals ***//
-    
-//    ofxFloatSlider camX;
-//    ofxFloatSlider camY;
-//    ofxFloatSlider camZ;
-//    
-//    ofxFloatSlider lightColR;
-//    ofxFloatSlider lightColG;
-//    ofxFloatSlider lightColB;
-//    ofxFloatSlider ambColR;
-//    ofxFloatSlider ambColG;
-//    ofxFloatSlider ambColB;
-//    ofxFloatSlider specColR;
-//    ofxFloatSlider specColG;
-//    ofxFloatSlider specColB;
-//    ofxFloatSlider lightPow;
-//    ofxFloatSlider lightPosX;
-//    ofxFloatSlider lightPosY;
-//    ofxFloatSlider lightPosZ;
-//    ofxFloatSlider blurAmnt;
-
+    //************ Global Params ***************//
     ofxIntSlider xTrans;
     ofxIntSlider yTrans;
     ofxIntSlider zTrans;
@@ -145,16 +71,10 @@ private:
     ofxFloatSlider visPulse;
     ofxIntSlider size;
     ofxIntSlider vertices;
-    
-//    ofxToggle wireFrame;
-//    ofxToggle texType;
-    
     ofxIntSlider texColA;
     ofxFloatSlider brightness;
     
     //*** audio ***//
-    
-    
     ofxFloatSlider oscilFreq;
     ofxFloatSlider oscilAmp;
     ofxToggle FM;
@@ -162,7 +82,6 @@ private:
     ofxFloatSlider lfoFreq;
     ofxIntSlider harmRatio;
     ofxFloatSlider modInd;
-    
     ofxFloatSlider pulseDuty;
     ofxFloatSlider noiseFiltLowCut;
     ofxFloatSlider noiseFiltHiCut;
@@ -174,11 +93,7 @@ private:
     ofxIntSlider sustain;
     ofxIntSlider release;
     
-    
     //********* Sub Synth *************//
-
-//    ofxFloatSlider subFreq1;
-//    ofxFloatSlider subFreq2;
     ofxIntSlider pole1Freq;
     ofxIntSlider pole2Freq;
     ofxIntSlider pole3Freq;
@@ -199,23 +114,11 @@ private:
     ofxIntSlider subEnv2CV;
     
     //*** read/write ***//
-
-//    ofxIntSlider regNum;
     ofxButton saveParams;
-//    ofxButton loadParams;
     ofxButton r1;
-//    ofxButton r2;
-//    ofxButton r3;
-//    ofxButton r4;
-//    ofxButton r5;
     ofxButton w1;
-//    ofxButton w2;
-//    ofxButton w3;
-//    ofxButton w4;
-//    ofxButton w5;
     
     //********* Visual ***********//
-    
     ofTexture tex;
     unsigned char texData[256 * 256 * 4];
     unsigned char * texPtr;
@@ -223,39 +126,14 @@ private:
     ofSpherePrimitive sphere;
     ofShader cubeShader;
 	ofShader sphereShader;
-//    ofEasyCam cam;
-    
     maxiOsc noiseFreq;
     double speed;
-    
-//    ofNode light;
-//    ofNode light2;
     ofNode lights[NUMLIGHTS];
-//    ofMatrix4x4 psmoveModelView;
-//    ofQuaternion controllerOrientation;
     ofVec4f globalLightPos[NUMLIGHTS];
-//    ofVec4f globalLightPos2;
     ofVec4f cameraSpaceLightPos[NUMLIGHTS];
-//    ofVec4f cameraSpaceLightPos2;
-//    ofVec3f lightCol;
-//    ofVec3f ambCol;
-//    ofVec3f specCol;
-    
     ofImage img;
-//    ofTexture tex2;
     ofImage normMap;
-    
-//    ofFbo fbo1;
-//    ofFbo fbo2;
-//    ofShader blurX;
-//    ofShader blurY;
-//    ofVec3f camPos;
-    
-    
     ofVec3f objPos;
-    
-//    ofVec3f furthestPoint;
-
     double dist;
     double mappedDistVal;
     double distScale;
@@ -265,10 +143,7 @@ private:
     double dbVal;
     double logCalc;
     double mappedVol;
-    
     int texR, texG, texB, texA;
-//    int objSel;
-
     ofColor objectRGB_col;
     float objectLightness;
     int lightness_freq_map;
@@ -276,11 +151,9 @@ private:
     //*********** Audio **************//
     
     //********** Granular and FM Synths *************//
-
     maxiSample samp;
-    
     maxiSample sample1;
-
+    
     maxiOsc pulseGen1;
     maxiOsc pulseGen2;
     maxiOsc pulseGen3;
@@ -313,14 +186,12 @@ private:
     maxiDelayline delay;
     
     maxiTimePitchStretch<grainPlayerWin, maxiSample> *gran;
-    
     maxiTimePitchStretch<grainPlayerWin, maxiSample> *gran1, *gran2;
     
     double granVol;
     double grainSpeed;
     double grainLength;
     double grainSig;
-
     double grainSig1;
 
     double modulator;
@@ -371,7 +242,6 @@ private:
     double saw4;
     
     //************* Sub Synth ***********//
-
     maxiOsc subOsc1;
     maxiOsc subOsc2;
     double subSig1;
@@ -403,32 +273,18 @@ private:
     double sympathetic1Osc2Out;
     
     //***************** AV Gui Params ************//
-    
     double params[numParams];
     float randParams[numRandParams];
     
     //********** Rapidmix ************//
-    
-    
     std::vector<rapidlib::trainingExample> trainingSet;
-    
     bool result;
     bool isTrained;
     
     //************ PS MOVE *************//
-    
     ofMatrix4x4 camModelViewMat;
-    
-#ifdef PSMOVE_ON
-
     ofMatrix4x4 controllerModelViewMatrix;
     ofMatrix4x4 combinedModelView;
-    
-#endif
-    
     unsigned int trigger;
-    
-    
 };
-
 #endif /* avObject_hpp */

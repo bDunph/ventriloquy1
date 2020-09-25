@@ -20,29 +20,18 @@
 #include "avObject.hpp"
 #include "psMoveTrackerClass.hpp"
 
-//#define PREPMODE 3
-#define PERFORMANCEMODE 5
+#define PREPMODE 0
+#define PERFORMANCEMODE 1
 #define NUMAVS 3
-#define PSMOVE_ON 1
-//#define PSMOVE_OFF 2
 
-class ofApp : public ofBaseApp, ofxMidiListener {
+class ofApp : public ofBaseApp{
     
 public:
     void setup();
     void exit();
     void update();
     void draw();
-    void globalRandParams();
-    //******** Maxim **********//
     void audioOut(float * output, int bufferSize, int nChannels);
-    
-    //****** Midi *********//
-    void newMidiMessage(ofxMidiMessage& eventArgs);
-    
-    void globalReadWrite();
-    void globalLoadExamples(int objectNumber);
-    
     void keyPressed(int key);
     void keyReleased(int key);
     void mouseMoved(int x, int y );
@@ -85,9 +74,6 @@ public:
     ofVec3f ambCol;
     ofVec3f specCol;
     ofVec3f lightPos;
-//    ofVec3f rawCamPos;
-//    bool saveExample;
-//    bool loadExample;
     int objectNumber;
     //************ Visuals **********//
     
@@ -101,7 +87,7 @@ public:
     ofMatrix4x4 cameraSpace;
     //*********** Maxim *****************//
     
-#ifdef PREPMODE
+#if PREPMODE
     maxiMix prepMix;
     double* synthOutPrep;
     double prepChannel;
@@ -115,11 +101,8 @@ public:
 #endif
     
     double sampleRate, bufferSize;
-//    double * synthOut;
-//    double * synthOut1;
-//    double * synthOut2;
     
-#ifdef PERFORMANCEMODE
+#if PERFORMANCEMODE
 
     double* synthOut[NUMAVS];
     double* panning[NUMAVS];
@@ -129,53 +112,10 @@ public:
     double channelOut[NUMAVS][2];
     
     avObject av[NUMAVS];
-//    bool avToggle[NUMAVS];
 #endif
-//    double * panning;
-//    double * panning1;
-//    double * panning2;
-    double finalSig[2];
-    double fullSig;
-    
-//    maxiMix mymix1;
-//    maxiMix mymix2;
-    
-    
-//    double outputs[2];
-    maxiEnv lim;
-    bool limTrig;
-    double envSig;
-//    double channelOut[2];
-//    double synthMix;
-//    double channel1, channel2;
-//    double panVals;
-//    double panner1, panner2;
-//    double channel1Out[2];
-//    double channel2Out[2];
-    
-    //********** Rapidmix ************//
-    
-    
-    
-    
-//    int numVoices;
-    
-    //************ Midi *************//
 
-//    ofxMidiIn midiIn;
-//    ofxMidiMessage midiMessage;
-//    int x_val;
-//    int y_val;
-//    int z_val;
-//    int val;
-//    int r, g, b, a;
-    
-#ifdef PSMOVE_ON
+    double finalSig[2];
     
     //********** PS Move ***********//
-    
     psMoveTrackerClass tracker;
-    
-#endif
-    
 };
